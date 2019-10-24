@@ -39,7 +39,7 @@ steps:
   displayName: dotnet test
   inputs:
     command: 'test'
-    projects: './'
+    projects: './YourStore'
     arguments: '-c $(buildConfiguration) --collect "XPlat Code Coverage"'
 
 - task: PublishCodeCoverageResults@1
