@@ -13,6 +13,15 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
+- task: SonarCloudPrepare@1
+  displayName: Prepare SonarCloud analysis
+  inputs:
+    SonarCloud: 'sonarcloud-escalonn'
+    organization: 'escalonn-github'
+    scannerMode: 'MSBuild'
+    projectKey: 'restreviews1909'
+
 # three different ways to solve the initial problem
 
 # - script:
@@ -25,7 +34,7 @@ steps:
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
-  workingDirectory: ./YourStore
+  workingDirectory: ./RestaurantReviews
 
 # - script: dotnet test
 #   displayName: dotnet test
@@ -39,19 +48,26 @@ steps:
   displayName: dotnet test
   inputs:
     command: 'test'
-    projects: '**/*.csproj'
-    arguments: '-c $(buildConfiguration) --collect "XPlat Code Coverage"'
+    projects: './RestaurantReviews'
+    arguments: --configuration $(buildConfiguration) --collect "XPlat Code Coverage"
 
 - task: PublishCodeCoverageResults@1
   displayName: Publish code coverage
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+    summaryFileLocation: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+
+- task: SonarCloudAnalyze@1
+  displayName: Run SonarCloud analysis
+
+- task: SonarCloudPublish@1
+  displayName: Publish SonarCloud quality gate result
 
 - task: DotNetCoreCLI@2
   displayName: dotnet publish + zip
   inputs:
     command: 'publish'
+    arguments: --configuration $(buildConfiguration)
     publishWebProjects: true
     zipAfterPublish: true
 
@@ -59,7 +75,7 @@ steps:
   displayName: App Service deploy
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Free Trial(9b456fa1-308e-4dba-bc90-6a89c7f8efcf)'
+    azureSubscription: 'Pay-As-You-Go(0518cd5b-d389-4983-9496-cdcae31dcc60)'
     appType: 'webApp'
-    WebAppName: 'YourStoreWeb20191024021647'
+    WebAppName: 'restreviews1909'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
