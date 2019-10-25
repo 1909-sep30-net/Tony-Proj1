@@ -33,7 +33,19 @@ namespace YourStoreWeb.Controllers
         public IActionResult AddCustomer()
         {
             _logger.LogInformation("Customer Controller: GetAddCustomer");
+            try
+            {
+                if (TempData["NotLogged"].ToString() == "true")
+                {
+                    TempData["NotLogged"] = "true";
 
+                }
+            }
+            catch
+            {
+                TempData["NotLogged"] = "false";
+
+            }
             return View(new ViewCustomerModel());
         }
 
@@ -66,7 +78,7 @@ namespace YourStoreWeb.Controllers
                 if (TempData["NotLogged"].ToString() =="true") 
                     return RedirectToAction("FinishOrder", "AddToCart");
                 else
-                    return View(m);
+                    return RedirectToAction("Index", "Home");
             }catch
             {
                 m.errorMessage = "Something Went Wrong with adding a customer. Please contact Your Admin.";
