@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject0", "..\XUnitTestProject0\XUnitTestProject0.csproj", "{66D7882C-0ABE-4166-94A4-235564551FBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject0", "XUnitTestProject0\XUnitTestProject0.csproj", "{66D7882C-0ABE-4166-94A4-235564551FBC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YourStore.Library", "..\YourStore.Library\YourStore.Library.csproj", "{C523BB23-01B2-4063-9481-DCA5E5CA1283}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YourStore.Library", "YourStore.Library\YourStore.Library.csproj", "{C523BB23-01B2-4063-9481-DCA5E5CA1283}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB", "..\DB\DB.csproj", "{2BDA7003-AF28-47A1-B8E5-7F9604688851}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB", "DB\DB.csproj", "{2BDA7003-AF28-47A1-B8E5-7F9604688851}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YourStoreWeb", "..\YourStoreWeb\YourStoreWeb.csproj", "{414CB154-7EDD-4ACC-80CF-ED70E4B26FC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YourStoreWeb", "YourStoreWeb\YourStoreWeb.csproj", "{414CB154-7EDD-4ACC-80CF-ED70E4B26FC1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C523BB23-01B2-4063-9481-DCA5E5CA1283} = {C523BB23-01B2-4063-9481-DCA5E5CA1283}
 	EndProjectSection
