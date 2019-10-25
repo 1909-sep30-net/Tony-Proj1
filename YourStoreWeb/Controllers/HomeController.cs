@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using YourStoreWeb.Models;
 using YourStore.Library.Repo;
-using System.Web;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using YourStore.Library;
-using System.Text;
 
 namespace YourStoreWeb.Controllers
 {
