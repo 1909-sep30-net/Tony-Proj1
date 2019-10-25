@@ -35,7 +35,7 @@ steps:
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
-  workingDirectory: ./Tony-Proj1
+  workingDirectory: ./
 
 
 # - script: dotnet test
