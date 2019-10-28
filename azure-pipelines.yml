@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -51,7 +51,7 @@ steps:
   inputs:
     command: 'test'
     projects: './'
-    arguments: --configuration $(buildConfiguration) --collect "XPlat Code Coverage"
+    arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
 
 - task: PublishCodeCoverageResults@1
   displayName: Publish code coverage
@@ -79,5 +79,5 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Free Trial(9b456fa1-308e-4dba-bc90-6a89c7f8efcf)'
     appType: 'webApp'
-    WebAppName: 'yourstoreweb'
+    WebAppName: 'YourStoreWeb20191024021647'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
