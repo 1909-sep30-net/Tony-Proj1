@@ -46,7 +46,7 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Free Trial(0afc561b-1f2a-482b-a185-9eea051a31d7)'
+    azureSubscription: 'Free Trial(9b456fa1-308e-4dba-bc90-6a89c7f8efcf)'
     appType: 'webApp'
     WebAppName: 'YourStoreWeb20191024021647'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip' 
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
