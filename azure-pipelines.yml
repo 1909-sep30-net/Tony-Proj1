@@ -29,7 +29,12 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: test
-    projects: ./
+    projects: |
+     YourStore.Library/YourStore.Library.csproj 
+     YourStoreWeb/YourStoreWeb.csproj
+     YourStore.sln    # Pass a solution instead of a csproj.
+
+
     arguments: --configuration $(buildConfiguration) --collect "Code coverage"
 
 - task: SonarCloudAnalyze@1
