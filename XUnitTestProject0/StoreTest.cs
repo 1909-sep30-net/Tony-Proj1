@@ -20,6 +20,14 @@ namespace XUnitTestProject0
             Assert.NotNull(s.ItemInventory);
         }
 
+        [Fact]
+        public void NameTest_Correct()
+        {
+            string x="#532" ;
+            s.Name = x;
+           // Assert.Equal("x ",);
+        }
+
 
     }
 }

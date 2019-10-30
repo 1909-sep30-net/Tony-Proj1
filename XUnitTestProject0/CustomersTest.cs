@@ -22,11 +22,7 @@ namespace XUnitTestProject0
             c.FirstName = x;
             Assert.Equal("ssss", c.FirstName);
         }
-        [Fact]
-        public void Name_EmptyValue_ThrowsArgumentException()
-        {
-            Assert.ThrowsAny<ArgumentException>(() => c.FirstName = string.Empty);
-        }
+    
 
 
     }

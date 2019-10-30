@@ -28,16 +28,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index">Store</a>
                         </li>
-                        <li class="nav-item">
-                           @{ var tempval = TempData.Peek("Logged");}
-                            @if (tempval == null)
-                            {
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                            }else{
-                                @tempval.ToString();
-                            }
-                        </li>
-                      
+                        @{ var tempval = TempData.Peek("Logged");}
+                        @if (tempval == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+
+                            </li>
+
+                        }
+                        else
+                        {
+                            @tempval.ToString();
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">LogOut</a>
+                                @{ TempData.Remove("Logged");}
+
+                            </li>
+
+                        }
 
                     </ul>
                 </div>

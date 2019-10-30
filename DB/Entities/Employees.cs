@@ -16,5 +16,6 @@ namespace DB.Entities
 
         public virtual RoleTypes Role { get; set; }
         public virtual Stores Store { get; set; }
+        
     }
 }
