@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -15,7 +15,6 @@ variables:
 steps:
 
 - task: SonarCloudPrepare@1
-  displayName: Prepare SonarCloud analysis
   inputs:
     SonarCloud: 'sonarcloud-tony'
     organization: 'liangtony'
@@ -23,61 +22,37 @@ steps:
     projectKey: 'proj1key'
     extraProperties: 'sonar.exclusions=**/lib/**'
 
-# three different ways to solve the initial problem
-
-# - script:
-#     cd RestaurantReviews
-#     dotnet build --configuration $(buildConfiguration)
-#   displayName: 'dotnet build $(buildConfiguration)'
-
-# - script: dotnet build RestaurantReviews --configuration $(buildConfiguration)
-#   displayName: 'dotnet build $(buildConfiguration)'
-
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
   workingDirectory: ./
 
-
-# - script: dotnet test
-#   displayName: dotnet test
-#   workingDirectory: RestaurantReviews
-
-# a task can encapsulate some useful logic so we don't have to
-# write it all out in script step...
-# in this case, this task is both running tests and publishing the results
-# to the build itself
 - task: DotNetCoreCLI@2
-  displayName: dotnet test
   inputs:
-    command: 'test'
-    projects: './'
-    arguments: --configuration $(buildConfiguration) --collect "XPlat Code Coverage"
+    command: test
+    projects: |
+     YourStore.Library/YourStore.Library.csproj 
+     YourStoreWeb/YourStoreWeb.csproj
+     XUnitTestProject0/XUnitTestProject0.csproj
+     YourStore.sln    # Pass a solution instead of a csproj.
 
-- task: PublishCodeCoverageResults@1
-  displayName: Publish code coverage
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+
+    arguments: --configuration $(buildConfiguration) --collect "Code coverage"
 
 - task: SonarCloudAnalyze@1
-  displayName: Run SonarCloud analysis
-
-- task: SonarCloudPublish@1
-  displayName: Publish SonarCloud quality gate result
 
 - task: DotNetCoreCLI@2
   displayName: dotnet publish + zip
   inputs:
     command: 'publish'
-    arguments: --configuration $(buildConfiguration)
     publishWebProjects: true
     zipAfterPublish: true
 
+- task: SonarCloudPublish@1
+
 - task: AzureRmWebAppDeployment@4
-  displayName: App Service deploy
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Free Trial(9b456fa1-308e-4dba-bc90-6a89c7f8efcf)'
     appType: 'webApp'
-    WebAppName: 'yourstoreweb'
+    WebAppName: 'YourStoreWeb20191024021647'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
