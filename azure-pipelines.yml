@@ -29,7 +29,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: test
-    projects: '**/*Test/*.csproj'
+    projects: ./
     arguments: --configuration $(buildConfiguration) --collect "Code coverage"
 
 - task: SonarCloudAnalyze@1
